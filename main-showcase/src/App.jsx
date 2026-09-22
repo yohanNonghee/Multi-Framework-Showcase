@@ -4,10 +4,20 @@ export default function MainHub() {
   const [selectedFramework, setSelectedFramework] = useState('react');
   const [activeTab, setActiveTab] = useState('preview');
 
+  
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
   const frameworkUrls = {
     react: 'http://localhost:5174',
     vue: 'http://localhost:5175',
     angular: 'http://localhost:4200'
+  };
+
+  
+  const frameworkGithubLinks = {
+    react: 'https://github.com/yohanNonghee/Multi-Framework-Showcase',
+    vue: 'https://github.com/yohanNonghee/Multi-Framework-Showcase',
+    angular: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
   };
 
   return (
@@ -15,12 +25,11 @@ export default function MainHub() {
       {/* Top Navbar / Header Hub */}
       <nav className="navbar navbar-dark bg-black border-bottom border-secondary px-4 py-3">
         <div className="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-2">
-          {/* Brand & Subtitle (Fixed overlapping issue with proper flex gap) */}
           <div className="d-flex align-items-center flex-wrap gap-3">
             <div>
               <h1 className="fw-bold fs-4 text-white mb-0 d-flex align-items-center flex-wrap gap-2">
                 <span>CarLoyal</span> 
-                <span className="badge px-2 py-1">Multi-Framework Showcase</span>
+                <span className="badge px-2 py-1 bg-primary">Multi-Framework Showcase</span>
               </h1>
               <p className="text-light opacity-75 small mb-0">Live Framework Comparison & Testing Hub</p>
             </div>
@@ -55,32 +64,52 @@ export default function MainHub() {
                   className={`btn fw-bold px-4 ${selectedFramework === 'react' ? 'btn-info text-dark shadow' : 'btn-outline-light opacity-75'}`}
                   onClick={() => setSelectedFramework('react')}
                 >
-                  <i className="bi bi-atom me-2"></i> React (5174)
+                  <i className="bi bi-atom me-2"></i> React
                 </button>
                 <button 
                   className={`btn fw-bold px-4 ${selectedFramework === 'vue' ? 'btn-success text-white shadow' : 'btn-outline-light opacity-75'}`}
                   onClick={() => setSelectedFramework('vue')}
                 >
-                  <i className="bi bi-box-seam me-2"></i> Vue (5175)
+                  <i className="bi bi-box-seam me-2"></i> Vue
                 </button>
                 <button 
                   className={`btn fw-bold px-4 ${selectedFramework === 'angular' ? 'btn-danger text-white shadow' : 'btn-outline-light opacity-75'}`}
                   onClick={() => setSelectedFramework('angular')}
                 >
-                  <i className="bi bi-shield-check me-2"></i> Angular (4200)
+                  <i className="bi bi-shield-check me-2"></i> Angular
                 </button>
               </div>
             </div>
 
-            {/* iframe Container with fixed full height */}
-            <div className="card bg-black border-secondary rounded-3 shadow-lg overflow-hidden flex-grow-1" style={{ minHeight: '82vh' }}>
-              <iframe 
-                src={frameworkUrls[selectedFramework]} 
-                title="Framework Preview"
-                className="w-100 h-100 border-0 bg-white"
-                style={{ minHeight: '82vh' }}
-              />
-            </div>
+            {/* Conditional Rendering: iframe for Local development, Showcase card for GitHub Pages */}
+            {isLocal ? (
+              <div className="card bg-black border-secondary rounded-3 shadow-lg overflow-hidden flex-grow-1" style={{ minHeight: '82vh' }}>
+                <iframe 
+                  src={frameworkUrls[selectedFramework]} 
+                  title="Framework Preview"
+                  className="w-100 h-100 border-0 bg-white"
+                  style={{ minHeight: '82vh' }}
+                />
+              </div>
+            ) : (
+              <div className="card bg-secondary text-white border-0 shadow-lg p-5 rounded-3 text-center flex-grow-1 d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
+                <div className="mb-4">
+                  <i className="bi bi-laptop display-1 text-info"></i>
+                </div>
+                <h2 className="fw-bold mb-3">CarLoyal {selectedFramework.toUpperCase()} Showcase Hub</h2>
+                <p className="lead text-light opacity-75 max-w-xl mx-auto mb-4">
+                  คุณกำลังรับชมผ่านระบบออนไลน์ (GitHub Pages) โครงสร้างส่วนนี้ถูกออกแบบให้รันควบคู่กับพอร์ตท้องถิ่น (Localhost) สำหรับการพัฒนาเชิงลึก สามารถตรวจสอบซอร์สโค้ดและรายละเอียดโปรเจกต์ทั้งหมดได้ที่ GitHub Repository ครับ
+                </p>
+                <a 
+                  href={frameworkGithubLinks[selectedFramework]} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn btn-light btn-lg fw-bold px-4 shadow"
+                >
+                  <i className="bi bi-github me-2"></i> View Source Code on GitHub
+                </a>
+              </div>
+            )}
           </div>
         ) : (
           /* Interactive Comparison Report */
