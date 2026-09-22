@@ -4,19 +4,36 @@ export default function MainHub() {
   const [selectedFramework, setSelectedFramework] = useState('react');
   const [activeTab, setActiveTab] = useState('preview');
 
-  
+  // Automatically check if it is Localhost.
   const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-const frameworkUrls = {
-    react: './react/App.jsx',
-    vue: './vue/App.vue',
-    angular: './angular/component.html'
+  // Port for local development
+  const frameworkUrls = {
+    react: 'http://localhost:5174',
+    vue: 'http://localhost:5175',
+    angular: 'http://localhost:4200'
   };
-  
-  const frameworkGithubLinks = {
-    react: 'https://github.com/yohanNonghee/Multi-Framework-Showcase',
-    vue: 'https://github.com/yohanNonghee/Multi-Framework-Showcase',
-    angular: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
+
+  // Link to the GitHub repository
+  const frameworkInfo = {
+    react: {
+      name: 'React (Vite + Hooks)',
+      desc: 'High-performance component rendering with React Hooks, JSX, and Bootstrap integration.',
+      icon: 'bi-atom text-info',
+      github: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
+    },
+    vue: {
+      name: 'Vue 3 (Composition API)',
+      desc: 'Reactive state management with Composition API and clean single-file components.',
+      icon: 'bi-box-seam text-success',
+      github: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
+    },
+    angular: {
+      name: 'Angular / Enterprise',
+      desc: 'Robust modular architecture utilizing enterprise-grade TypeScript structuring.',
+      icon: 'bi-shield-check text-danger',
+      github: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
+    }
   };
 
   return (
@@ -28,7 +45,7 @@ const frameworkUrls = {
             <div>
               <h1 className="fw-bold fs-4 text-white mb-0 d-flex align-items-center flex-wrap gap-2">
                 <span>CarLoyal</span> 
-                <span className="badge px-2 py-1 ">Multi-Framework Showcase</span>
+                <span className="badge px-2 py-1 bg-primary">Multi-Framework Showcase</span>
               </h1>
               <p className="text-light opacity-75 small mb-0">Live Framework Comparison & Testing Hub</p>
             </div>
@@ -63,19 +80,19 @@ const frameworkUrls = {
                   className={`btn fw-bold px-4 ${selectedFramework === 'react' ? 'btn-info text-dark shadow' : 'btn-outline-light opacity-75'}`}
                   onClick={() => setSelectedFramework('react')}
                 >
-                  <i className="bi bi-atom me-2"></i> React
+                  <i className="bi bi-atom me-2"></i> React (5174)
                 </button>
                 <button 
                   className={`btn fw-bold px-4 ${selectedFramework === 'vue' ? 'btn-success text-white shadow' : 'btn-outline-light opacity-75'}`}
                   onClick={() => setSelectedFramework('vue')}
                 >
-                  <i className="bi bi-box-seam me-2"></i> Vue
+                  <i className="bi bi-box-seam me-2"></i> Vue (5175)
                 </button>
                 <button 
                   className={`btn fw-bold px-4 ${selectedFramework === 'angular' ? 'btn-danger text-white shadow' : 'btn-outline-light opacity-75'}`}
                   onClick={() => setSelectedFramework('angular')}
                 >
-                  <i className="bi bi-shield-check me-2"></i> Angular
+                  <i className="bi bi-shield-check me-2"></i> Angular (4200)
                 </button>
               </div>
             </div>
@@ -93,20 +110,22 @@ const frameworkUrls = {
             ) : (
               <div className="card bg-secondary text-white border-0 shadow-lg p-5 rounded-3 text-center flex-grow-1 d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
                 <div className="mb-4">
-                  <i className="bi bi-laptop display-1 text-info"></i>
+                  <i className={`bi ${frameworkInfo[selectedFramework].icon} display-1`}></i>
                 </div>
-                <h2 className="fw-bold mb-3">CarLoyal {selectedFramework.toUpperCase()} Showcase Hub</h2>
+                <h2 className="fw-bold mb-3">{frameworkInfo[selectedFramework].name} Showcase</h2>
                 <p className="lead text-light opacity-75 max-w-xl mx-auto mb-4">
-                 
+                  {frameworkInfo[selectedFramework].desc}
                 </p>
-                <a 
-                  href={frameworkGithubLinks[selectedFramework]} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn btn-light btn-lg fw-bold px-4 shadow"
-                >
-                  <i className="bi bi-github me-2"></i> View Source Code on GitHub
-                </a>
+                <div className="d-flex gap-3 justify-content-center">
+                  <a 
+                    href={frameworkInfo[selectedFramework].github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn btn-light btn-lg fw-bold px-4 shadow"
+                  >
+                    <i className="bi bi-github me-2"></i> View Repository
+                  </a>
+                </div>
               </div>
             )}
           </div>
