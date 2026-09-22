@@ -6,9 +6,9 @@ export default function MainHub() {
 
   //  (Local Development)
   const frameworkUrls = {
-    react: 'http://localhost:5174',
-    vue: 'http://localhost:5175',
-    angular: 'http://localhost:4200'
+    react: 'https://reactttttttttt.netlify.app/',
+    vue: 'https://vueeeeeeeeeeeee.netlify.app/',
+    angular: 'https://augularrrrrr.netlify.app/'
   };
 
   return (
