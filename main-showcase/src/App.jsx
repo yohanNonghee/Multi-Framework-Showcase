@@ -7,12 +7,11 @@ export default function MainHub() {
   
   const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-  const frameworkUrls = {
-    react: 'http://localhost:5174',
-    vue: 'http://localhost:5175',
-    angular: 'http://localhost:4200'
+const frameworkUrls = {
+    react: './react/App.jsx',
+    vue: './vue/App.vue',
+    angular: './angular/component.html'
   };
-
   
   const frameworkGithubLinks = {
     react: 'https://github.com/yohanNonghee/Multi-Framework-Showcase',
@@ -29,7 +28,7 @@ export default function MainHub() {
             <div>
               <h1 className="fw-bold fs-4 text-white mb-0 d-flex align-items-center flex-wrap gap-2">
                 <span>CarLoyal</span> 
-                <span className="badge px-2 py-1 bg-primary">Multi-Framework Showcase</span>
+                <span className="badge px-2 py-1 ">Multi-Framework Showcase</span>
               </h1>
               <p className="text-light opacity-75 small mb-0">Live Framework Comparison & Testing Hub</p>
             </div>

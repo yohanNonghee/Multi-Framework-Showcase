@@ -1,4 +1,4 @@
-name: Deploy Main Hub to GitHub Pages
+name: Deploy Multi-Framework Showcase
 
 on:
   push:
@@ -25,15 +25,34 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: main-showcase/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ./main-showcase
+      # 1. Build Main Hub
+      - name: Build Main Hub
+        run: |
+          cd main-showcase
+          npm ci
+          npm run build
 
-      - name: Build project
-        run: npm run build
-        working-directory: ./main-showcase
+      # 2. Build React Sub-page 
+      - name: Build React Page
+        run: |
+          cd page-react
+          npm ci
+          npm run build
+
+      # 3. Build Vue Sub-page 
+      - name: Build Vue Page
+        run: |
+          cd page-vue
+          npm ci
+          npm run build
+
+      # 4. dist  Main Hub
+      - name: Combine Artifacts
+        run: |
+          mkdir -p main-showcase/dist/react main-showcase/dist/vue
+          cp -r page-react/dist/* main-showcase/dist/react/
+          cp -r page-vue/dist/* main-showcase/dist/vue/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
