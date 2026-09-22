@@ -4,36 +4,11 @@ export default function MainHub() {
   const [selectedFramework, setSelectedFramework] = useState('react');
   const [activeTab, setActiveTab] = useState('preview');
 
-  // Automatically check if it is Localhost.
-  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-
-  // Port for local development
+  //  (Local Development)
   const frameworkUrls = {
     react: 'http://localhost:5174',
     vue: 'http://localhost:5175',
     angular: 'http://localhost:4200'
-  };
-
-  // Link to the GitHub repository
-  const frameworkInfo = {
-    react: {
-      name: 'React (Vite + Hooks)',
-      desc: 'High-performance component rendering with React Hooks, JSX, and Bootstrap integration.',
-      icon: 'bi-atom text-info',
-      github: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
-    },
-    vue: {
-      name: 'Vue 3 (Composition API)',
-      desc: 'Reactive state management with Composition API and clean single-file components.',
-      icon: 'bi-box-seam text-success',
-      github: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
-    },
-    angular: {
-      name: 'Angular / Enterprise',
-      desc: 'Robust modular architecture utilizing enterprise-grade TypeScript structuring.',
-      icon: 'bi-shield-check text-danger',
-      github: 'https://github.com/yohanNonghee/Multi-Framework-Showcase'
-    }
   };
 
   return (
@@ -45,7 +20,7 @@ export default function MainHub() {
             <div>
               <h1 className="fw-bold fs-4 text-white mb-0 d-flex align-items-center flex-wrap gap-2">
                 <span>CarLoyal</span> 
-                <span className="badge px-2 py-1 bg-primary">Multi-Framework Showcase</span>
+                <span className="badge px-2 py-1 ">Multi-Framework Showcase</span>
               </h1>
               <p className="text-light opacity-75 small mb-0">Live Framework Comparison & Testing Hub</p>
             </div>
@@ -97,37 +72,15 @@ export default function MainHub() {
               </div>
             </div>
 
-            {/* Conditional Rendering: iframe for Local development, Showcase card for GitHub Pages */}
-            {isLocal ? (
-              <div className="card bg-black border-secondary rounded-3 shadow-lg overflow-hidden flex-grow-1" style={{ minHeight: '82vh' }}>
-                <iframe 
-                  src={frameworkUrls[selectedFramework]} 
-                  title="Framework Preview"
-                  className="w-100 h-100 border-0 bg-white"
-                  style={{ minHeight: '82vh' }}
-                />
-              </div>
-            ) : (
-              <div className="card bg-secondary text-white border-0 shadow-lg p-5 rounded-3 text-center flex-grow-1 d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
-                <div className="mb-4">
-                  <i className={`bi ${frameworkInfo[selectedFramework].icon} display-1`}></i>
-                </div>
-                <h2 className="fw-bold mb-3">{frameworkInfo[selectedFramework].name} Showcase</h2>
-                <p className="lead text-light opacity-75 max-w-xl mx-auto mb-4">
-                  {frameworkInfo[selectedFramework].desc}
-                </p>
-                <div className="d-flex gap-3 justify-content-center">
-                  <a 
-                    href={frameworkInfo[selectedFramework].github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn btn-light btn-lg fw-bold px-4 shadow"
-                  >
-                    <i className="bi bi-github me-2"></i> View Repository
-                  </a>
-                </div>
-              </div>
-            )}
+            {/* iframe Container */}
+            <div className="card bg-black border-secondary rounded-3 shadow-lg overflow-hidden flex-grow-1" style={{ minHeight: '82vh' }}>
+              <iframe 
+                src={frameworkUrls[selectedFramework]} 
+                title="Framework Preview"
+                className="w-100 h-100 border-0 bg-white"
+                style={{ minHeight: '82vh' }}
+              />
+            </div>
           </div>
         ) : (
           /* Interactive Comparison Report */
@@ -174,40 +127,6 @@ export default function MainHub() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
-
-              {/* Discussion Cards */}
-              <div className="row g-4 mb-4">
-                <div className="col-md-6">
-                  <div className="p-4 bg-light rounded-3 border-start border-primary border-4 h-100 shadow-sm">
-                    <h4 className="fw-bold text-dark">
-                      <i className="bi bi-lightning-charge text-warning me-2"></i>1. State & Re-rendering
-                    </h4>
-                    <p className="text-secondary mt-2 mb-0">
-                      Updating UI state in React and Vue utilizes a declarative approach, eliminating manual DOM queries and offering cleaner maintenance than vanilla JS.
-                    </p>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="p-4 bg-light rounded-3 border-start border-success border-4 h-100 shadow-sm">
-                    <h4 className="fw-bold text-dark">
-                      <i className="bi bi-window-stack text-success me-2"></i>2. Architecture & Compilation
-                    </h4>
-                    <p className="text-secondary mt-2 mb-0">
-                      Vue excels with template readability, while React provides full JavaScript flexibility (JSX) for rendering complex component trees.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Q&A Reflection */}
-              <div className="p-4 bg-dark text-white rounded-3 shadow">
-                <h3 className="fw-bold mb-3">
-                  <i className="bi bi-chat-left-dots text-info me-2"></i> Reflection & Key Takeaways
-                </h3>
-                <p className="text-light opacity-75 mb-0">
-                  <strong>Which framework is easiest to set up?</strong> Vue 3 offered the fastest initial development speed due to its clean separation of templates and reactivity. React provided robust ecosystem support for scaling components.
-                </p>
               </div>
             </div>
           </div>
