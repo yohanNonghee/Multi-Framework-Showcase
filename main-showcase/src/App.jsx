@@ -98,7 +98,7 @@ export default function MainHub() {
                 </div>
                 <h2 className="fw-bold mb-3">CarLoyal {selectedFramework.toUpperCase()} Showcase Hub</h2>
                 <p className="lead text-light opacity-75 max-w-xl mx-auto mb-4">
-                  คุณกำลังรับชมผ่านระบบออนไลน์ (GitHub Pages) โครงสร้างส่วนนี้ถูกออกแบบให้รันควบคู่กับพอร์ตท้องถิ่น (Localhost) สำหรับการพัฒนาเชิงลึก สามารถตรวจสอบซอร์สโค้ดและรายละเอียดโปรเจกต์ทั้งหมดได้ที่ GitHub Repository ครับ
+                 
                 </p>
                 <a 
                   href={frameworkGithubLinks[selectedFramework]} 
